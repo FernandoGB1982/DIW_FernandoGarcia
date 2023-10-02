@@ -6,6 +6,7 @@
 
   $email= $_POST['email'];
   $contraseña = $_POST['contraseña1'];
+  $captcha = $_POST['captcha'];
 
   $busqueda=mysqli_query($conexion,"SELECT * FROM usuarios WHERE Usuario_email='$email'")
   or die("Problemas en el select" . mysqli_error($conexion));
@@ -18,13 +19,21 @@
       if (password_verify($contraseña, $dbContraseña)) {
           $_SESSION['email']=$email;
 
-          header('Location:paginaUsuario.php');
+            if ($_SESSION['captcha_code'] == $captcha) {
+                header('Location:paginaUsuario.php');
+            }else {
+                header('Location:formularioLogin.php?captcha=1');
+            }
           //header('Location:formularioLogin.php?login=1');
       }else{
-          header('Location:formularioLogin.php?pass=1');
+        header('Location:formularioLogin.php?pass=1');
       }
+
   }else{
       header('Location:formularioLogin.php?mail=1');
   }
+
+  
+
   mysqli_close($conexion);
 ?>

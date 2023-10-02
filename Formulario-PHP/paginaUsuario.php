@@ -14,10 +14,10 @@
   or die("Problemas en el select" . mysqli_error($conexion));
   
   if(mysqli_num_rows($busqueda) != 0){
-          $row = mysqli_fetch_assoc($busqueda); 
-          $foto = base64_encode($row['Usuario_fotografia']);
-          $nombre = $row['Usuario_nombre'];
+          $row = mysqli_fetch_assoc($busqueda);   
   }
+  $foto = base64_encode($row['Usuario_fotografia']);
+  $nombre = $row['Usuario_nombre'];
 ?>
 
 <!DOCTYPE html>
@@ -42,16 +42,16 @@
                 </h1>
             </div>
 
-            <div class="col-md-4 text-end" >
+            <div class="col-md-4 text-md-end text-center" >
               <a class="fs-6 fw-bold text-uppercase text-white enlace me-5"  href="logout.php">Logout</a>
           </div>
         </div> 
     </header>
 
-  <main class="container p-2 contenido">
+  <main class="container p-2 contenido pb-md-0 pb-5">
     <div class="row g-0 align-items-center justify-content-around">
       <div class="col-md-4">
-        <img class="img-fluid mt-5 mb-5" src="data:image/png;base64,<?php echo $foto; ?>" alt="usuario">
+        <img class="img-fluid mt-5 mb-5 p-md-0 p-5" src="data:image/png;base64,<?php echo $foto; ?>" alt="usuario">
       </div>
 
       <div class="col-md-4">

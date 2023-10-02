@@ -19,6 +19,7 @@
         $Apellido1=$row['Usuario_apellido1'];
         $Apellido2=$row['Usuario_apellido2'];
         $Nif=$row['Usuario_nif'];
+        $Telefono=$row['Usuario_numero_telefono'];
         $Nick=$row['Usuario_nick'];
         $Poblacion=$row['Usuario_poblacion'];
         $Provincia=$row['Usuario_provincia'];
@@ -48,7 +49,7 @@
                 </h1>
             </div>
 
-            <div class="col-md-4 text-end" >
+            <div class="col-md-4 text-md-end text-center" >
               <a class="fs-6 fw-bold text-uppercase text-white me-5 enlace"  href="paginaUsuario.php">Perfil</a>
               <a class="fs-6 fw-bold text-uppercase text-white enlace"  href="logout.php">Logout</a>
           </div>
@@ -59,7 +60,7 @@
     <div class="row g-0 align-items-center justify-content-around">
 
       <div class="col-md-4">
-        <img class="img-fluid mt-5 mb-5" src="imagenes/icon-perfil.png" alt="login">
+        <img class="img-fluid mt-5 mb-5 p-md-0 p-5" src="imagenes/icon-perfil.png" alt="login">
       </div>
 
       <div class="col-md-4">
@@ -89,6 +90,9 @@
 
             <label class="fs-6 p-1">Introduzca DNI:</label>
             <input class="form-control" id="nif" type="text" pattern="[0-9]{8}[A-Za-z]{1}" maxlength="40" name="nif" value="<?php echo $Nif; ?>">
+
+            <label class="fs-6 p-1">Introduzca Telefono:</label>
+            <input class="form-control" id="telefono" type="tel" pattern="[0-9]{9}" maxlength="40" name="telefono" value="<?php echo $Telefono; ?>">
 
             <label class="fs-6 p-1">Introduzca Nick:</label>
             <input class="form-control" id="nick" type="text"  maxlength="40" name="nick" value="<?php echo $Nick; ?>">

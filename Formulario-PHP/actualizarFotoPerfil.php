@@ -13,6 +13,8 @@
   $imagen_temporal = $_FILES['foto']['tmp_name'];
   $imagen_usuario = addslashes(file_get_contents($imagen_temporal));
 
+  
+
   $actualiza=mysqli_query($conexion, 
   "UPDATE usuarios  
   SET Usuario_fotografia = '$imagen_usuario'

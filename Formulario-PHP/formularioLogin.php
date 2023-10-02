@@ -19,7 +19,7 @@
                 </h1>
             </div>
 
-            <div class="col-md-4 text-end" >
+            <div class="col-md-4 text-md-end text-center" >
               <a class="fs-6 fw-bold text-uppercase text-white me-5 enlace"  href="index.html">Inicio</a>
               <a class="fs-6 fw-bold text-uppercase text-white enlace"  href="formularioRegistro.php">Registrate</a>
           </div>
@@ -49,6 +49,14 @@
                     document.getElementById("passAlert").remove();
                   },5000)
                 </script>';
+              }else if(isset($_GET['captcha']) && $_GET['captcha']==1){
+                echo "<div class='alert alert-danger' id='captchaAlert' role='alert'>Captcha Incorrecto</div>";
+                echo
+                '<script>
+                  setTimeout(function(){
+                    document.getElementById("captchaAlert").remove();
+                  },5000)
+                </script>';
               }else if(isset($_GET['login']) && $_GET['login']==1){
               echo "<div class='alert alert-success' id='loginAlert' role='alert'>Usuario Logueado con exito!!</div>";
               echo
@@ -67,14 +75,27 @@
             <label class="fs-6 p-1 mt-3">Introduzca Password:</label>
             <input class="form-control" id="pass1" type="password" placeholder="Contraseña"  minlength="5" name="contraseña1" required>
 
-            <p  class="fs-6 p-1 mt-3">¿Aún no te has Registrado? <a href="formularioRegistro.html">Registrate</a>
+            <label class="fs-6 fw-bold p-1 mt-5">Captcha:</label>
+            <div class="row align-items-center">
+              <div class="col-md-6">
+                <input class="form-control" id="captcha" type="text" placeholder="Código" minlength="6" name="captcha" required>
+              </div>
+
+              <div class="col-md-4">
+                <img class="mx-auto d-block" src="captcha.php"/>
+              </div>
+            </div>
+            
+
+            <p  class="fs-6 p-1 mt-5">¿Aún no te has Registrado? <a href="formularioRegistro.html">Registrate</a>
             </p>
-            <button class="btn btn-dark w-100 mt-3" type="submit" value="login">Iniciar Sesión 
+            
+            <button class="btn btn-dark w-100 " type="submit" value="login">Iniciar Sesión 
         </form>
       </div>
 
       <div class="col-md-4">
-        <img class="img-fluid mt-5 mb-5" src="imagenes/icon-login.png" alt="login">
+        <img class="img-fluid mt-5 mb-5 p-md-0 p-5" src="imagenes/icon-login.png" alt="login">
       </div>
     </div>
   </main>

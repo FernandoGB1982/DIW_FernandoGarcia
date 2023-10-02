@@ -18,7 +18,7 @@
                 Formulario de registro
               </h1>
           </div>
-          <div class="col-md-4 text-end">
+          <div class="col-md-4 text-md-end text-center">
               <a class="fs-6 fw-bold text-uppercase text-white me-5 enlace"  href="index.html">Inicio</a>
               <a class="fs-6 fw-bold text-uppercase text-white enlace"  href="formularioLogin.php">Login</a>
           </div>
@@ -72,13 +72,15 @@
 
             <label class="fs-6 p-1 mt-3">Repetir Password:</label>
             <input class="form-control" id="pass2" type="password" placeholder="Repetir Contraseña"  minlength="5" name="contraseña2" required>
+
+            
             
             <button class="btn btn-dark w-100 mt-5" type="submit" value="registrar">Registrar
         </form>
       </div>
 
       <div class="col-md-4">
-        <img class="img-fluid mt-5 mb-5"" src="imagenes/icon-register.png" alt="alta">
+        <img class="img-fluid mt-5 mb-5 p-md-0 p-5"" src="imagenes/icon-register.png" alt="alta">
       </div>
     </div>
   </main>
