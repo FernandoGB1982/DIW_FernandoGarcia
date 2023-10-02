@@ -33,7 +33,15 @@
         <form class="bg-light rounded p-3 m-5 shadow formulario" action="login.php" method="post">
 
             <?php
-              if(isset($_GET['mail']) && $_GET['mail']==1){
+              if(isset($_GET['bloq']) && $_GET['bloq']==1){
+                echo "<div class='alert alert-danger' id='bloqAlert' role='alert'>Usuario Bloqueado !!</div>";
+                echo
+                '<script>
+                  setTimeout(function(){
+                    document.getElementById("bloqAlert").remove();
+                  },5000)
+                </script>';
+              }else if(isset($_GET['mail']) && $_GET['mail']==1){
                 echo "<div class='alert alert-danger' id='mailAlert' role='alert'>El Usuario no Existe - Correo Incorrecto</div>";
                 echo
                 '<script>
@@ -42,19 +50,23 @@
                   },5000)
                 </script>';
               }else if(isset($_GET['pass']) && $_GET['pass']==1){
-                echo "<div class='alert alert-danger' id='passAlert' role='alert'>El Usuario no Existe - Password Incorrecto</div>";
+                echo "<div class='alert alert-danger' id='passAlert' role='alert'>El Usuario no Existe - Password Incorrecto</div>
+                <div class='alert alert-info' id='passAlert2' role='alert'>Le quedan ".$_GET['inte']." intentos</div>";
                 echo
                 '<script>
                   setTimeout(function(){
                     document.getElementById("passAlert").remove();
+                    document.getElementById("passAlert2").remove();
                   },5000)
                 </script>';
               }else if(isset($_GET['captcha']) && $_GET['captcha']==1){
-                echo "<div class='alert alert-danger' id='captchaAlert' role='alert'>Captcha Incorrecto</div>";
+                echo "<div class='alert alert-danger' id='captchaAlert' role='alert'>Captcha Incorrecto</div>
+                <div class='alert alert-info' id='captchaAlert2' role='alert'>Le quedan ".$_GET['inte']." intentos</div>";
                 echo
                 '<script>
                   setTimeout(function(){
                     document.getElementById("captchaAlert").remove();
+                    document.getElementById("captchaAlert2").remove();
                   },5000)
                 </script>';
               }else if(isset($_GET['login']) && $_GET['login']==1){
