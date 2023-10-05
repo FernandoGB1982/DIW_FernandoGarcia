@@ -3,6 +3,8 @@
 
     if(!isset($_SESSION['email'])) {
         header('Location:formularioLogin.php');
+    }else if($_SESSION['perfil']!='administrador'){
+      header('Location:formularioLogin.php');
     }
 
     $conexion = mysqli_connect("localhost", "root", "", "usuario") 
@@ -51,7 +53,7 @@
             </div>
 
             <div class="col-md-4 text-md-end text-center" >
-              <a class="fs-6 fw-bold text-uppercase text-white me-5 enlace"  href="paginaUsuario.php">Perfil</a>
+              <a class="fs-6 fw-bold text-uppercase text-white me-5 enlace"  href="paginaAdministrador.php">Perfil Administrador</a>
               <a class="fs-6 fw-bold text-uppercase text-white enlace"  href="logout.php">Logout</a>
           </div>
         </div> 
@@ -65,7 +67,7 @@
       </div>
 
       <div class="col-md-4">
-        <form class="bg-light rounded p-3 m-5 shadow formulario" action="actualizarPerfil.php" method="post">
+        <form class="bg-light rounded p-3 m-5 shadow formulario" action="actualizarPerfilAdministrador.php" method="post">
 
             <?php
                   if(isset($_GET['actu']) && $_GET['actu']==1){

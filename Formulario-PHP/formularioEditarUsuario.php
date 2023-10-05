@@ -1,20 +1,17 @@
 <?php
     session_start();
 
-    if(!isset($_SESSION['email'])) {
-        header('Location:formularioLogin.php');
-    }
-
     $conexion = mysqli_connect("localhost", "root", "", "usuario") 
     or die("Problemas con la conexión");
 
-    $email=$_SESSION['email'];
+    $id=$_GET['codigoEditar'];
 
-    $busqueda=mysqli_query($conexion,"SELECT * FROM usuarios WHERE Usuario_email='$email'")
+    $busqueda=mysqli_query($conexion,"SELECT * FROM usuarios WHERE Usuario_id='$id'")
     or die("Problemas en el select" . mysqli_error($conexion));
     
     if(mysqli_num_rows($busqueda) != 0){
         $row = mysqli_fetch_assoc($busqueda); 
+        $Id=$row['Usuario_id'];
         $Nombre=$row['Usuario_nombre'];
         $Apellido1=$row['Usuario_apellido1'];
         $Apellido2=$row['Usuario_apellido2'];
@@ -24,6 +21,7 @@
         $Poblacion=$row['Usuario_poblacion'];
         $Provincia=$row['Usuario_provincia'];
         $Domicilio=$row['Usuario_domicilio'];
+        $Bloqueado=$row['Usuario_bloqueado'];
     }
 
     mysqli_close($conexion);
@@ -46,13 +44,15 @@
         <div class="row align-items-center justify-content-between">
             <div class="col-md-4 text-center">
                 <h1 class="text-white titulo">
-                  Editar Perfil de <?php echo $Nombre; ?>
+                  Editar Usuario - <?php echo $Nombre; ?>
                 </h1>
             </div>
 
-            <div class="col-md-4 text-md-end text-center" >
-              <a class="fs-6 fw-bold text-uppercase text-white me-5 enlace"  href="paginaUsuario.php">Perfil</a>
+            <div class="col-md-6 text-md-end text-center" >
+            <a class="fs-6 fw-bold text-uppercase text-white me-5 enlace"  href="paginaAdministrador.php">Perfil Administrador</a>
+              <a class="fs-6 fw-bold text-uppercase text-white me-5 enlace"  href="listadoUsuarios.php">Listado</a>
               <a class="fs-6 fw-bold text-uppercase text-white enlace"  href="logout.php">Logout</a>
+
           </div>
         </div> 
     </header>
@@ -61,11 +61,7 @@
     <div class="row g-0 align-items-center justify-content-around">
 
       <div class="col-md-4">
-        <img class="img-fluid mt-5 mb-5 p-md-0 p-5" src="imagenes/icon-perfil.png" alt="login">
-      </div>
-
-      <div class="col-md-4">
-        <form class="bg-light rounded p-3 m-5 shadow formulario" action="actualizarPerfil.php" method="post">
+        <form class="bg-light rounded p-3 m-5 shadow formulario" action="editarUsuario.php?codigoEditar=<?php echo $id; ?>" method="post">
 
             <?php
                   if(isset($_GET['actu']) && $_GET['actu']==1){
@@ -92,6 +88,9 @@
             <label class="fs-6 p-1">Introduzca DNI:</label>
             <input class="form-control" id="nif" type="text" pattern="[0-9]{8}[A-Za-z]{1}" maxlength="40" name="nif" value="<?php echo $Nif; ?>">
 
+            <label class="fs-6 p-1">Introduzca Bloqueo:</label>
+            <input class="form-control" id="bloqueado" type="text" pattern="[0-9]{1}" maxlength="1" name="bloqueado" value="<?php echo $Bloqueado; ?>">
+
             <label class="fs-6 p-1">Introduzca Telefono:</label>
             <input class="form-control" id="telefono" type="tel" pattern="[0-9]{9}" maxlength="40" name="telefono" value="<?php echo $Telefono; ?>">
 
@@ -109,6 +108,10 @@
 
             <button class="btn btn-dark w-100 mt-3" type="submit" value="editar">Actualizar 
         </form>
+      </div>
+
+      <div class="col-md-4">
+        <img class="img-fluid mt-5 mb-5 p-md-0 p-5" src="imagenes/icon-perfil.png" alt="login">
       </div>
 
     </div>

@@ -102,6 +102,9 @@
             <p  class="fs-6 p-1 mt-5">¿Aún no te has Registrado? <a href="formularioRegistro.html">Registrate</a>
             </p>
             
+            <!-- <p  class="fs-6 p-1 mt-0">¿Has Olvidado tu Contraseña? <a href="formularioContraseña.php">Pulse aquí</a>
+            </p> -->
+            
             <button class="btn btn-dark w-100 " type="submit" value="login">Iniciar Sesión 
         </form>
       </div>

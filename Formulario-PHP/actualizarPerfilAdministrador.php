@@ -3,6 +3,8 @@
 
   if(!isset($_SESSION['email'])) {
       header('Location:formularioLogin.php');
+  }else if($_SESSION['perfil']!='administrador'){
+    header('Location:formularioLogin.php');
   }
 
   $conexion = mysqli_connect("localhost", "root", "", "usuario") 
@@ -22,12 +24,11 @@
   $email=$_SESSION['email'];
   $actualiza=mysqli_query($conexion, 
   "UPDATE usuarios  
-  SET Usuario_nombre = '$nombre', Usuario_apellido1 = '$apellido1', Usuario_apellido2 = '$apellido2', 
-  Usuario_nif = '$nif', Usuario_numero_telefono = '$telefono', Usuario_Nick = '$nick', Usuario_domicilio = '$domicilio' ,Usuario_Poblacion = '$poblacion', Usuario_Provincia = '$provincia'
+  SET Usuario_nombre = '$nombre', Usuario_apellido1 = '$apellido1', Usuario_apellido2 = '$apellido2', Usuario_nif = '$nif', Usuario_numero_telefono = $telefono, Usuario_Nick = '$nick', Usuario_domicilio = '$domicilio' ,Usuario_Poblacion = '$poblacion', Usuario_Provincia = '$provincia'
   WHERE Usuario_email='$email'")
   or die("Problemas en el update" . mysqli_error($conexion));
 
-  header('Location:formularioUsuario.php?actu=1');
+  header('Location:formularioAdministrador.php?actu=1');
 
   mysqli_close($conexion);
 ?>

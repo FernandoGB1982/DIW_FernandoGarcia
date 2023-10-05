@@ -12,12 +12,15 @@
   $busqueda=mysqli_query($conexion,"SELECT * FROM usuarios WHERE Usuario_email='$email'")
   or die("Problemas en el select" . mysqli_error($conexion));
     
+  $fecha=date('Y-m-d H:i:s');
+
   if( mysqli_num_rows($busqueda) != 0){
       $row = mysqli_fetch_assoc($busqueda); 
       $dbEmail=$row['Usuario_email'];
       $dbContraseña=$row['Usuario_clave'];
       $dbBloqueado=$row['Usuario_bloqueado'];
       $dbNumeroIntentos=$row['Usuario_numero_intentos'];
+      $dbPerfil=$row['Usuario_perfil'];
 
       if($dbBloqueado==1){
         header('Location:formularioLogin.php?bloq=1');
@@ -30,7 +33,13 @@
               "UPDATE usuarios 
               SET Usuario_numero_intentos='0' 
               WHERE  Usuario_email= '$dbEmail'");
-              header('Location:paginaUsuario.php');
+              if($dbPerfil == 'administrador'){
+                $_SESSION['perfil']= $dbPerfil;
+                header('Location:paginaAdministrador.php');
+              }else if($dbPerfil=='usuario'){
+                header('Location:paginaUsuario.php');
+              }
+              
           }else {
               $dbNumeroIntentos++;
               $intentos=(3-$dbNumeroIntentos);
@@ -44,7 +53,7 @@
               if($dbNumeroIntentos==3){
                 mysqli_query($conexion,
                 "UPDATE usuarios 
-                SET Usuario_bloqueado='1', Usuario_numero_intentos='0' 
+                SET Usuario_bloqueado='1', Usuario_numero_intentos='0', Usuario_fecha_bloqueo='$fecha'
                 WHERE  Usuario_email= '$dbEmail'");
                 header('Location:formularioLogin.php?bloq=1');
               }
@@ -64,7 +73,7 @@
           if($dbNumeroIntentos==3){
             mysqli_query($conexion,
             "UPDATE usuarios 
-            SET Usuario_bloqueado='1', Usuario_numero_intentos='0' 
+            SET Usuario_bloqueado='1', Usuario_numero_intentos='0', Usuario_fecha_bloqueo='$fecha'
             WHERE  Usuario_email= '$dbEmail'");
             header('Location:formularioLogin.php?bloq=1');
           }

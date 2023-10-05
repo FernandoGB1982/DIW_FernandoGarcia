@@ -1,7 +1,9 @@
 <?php
   session_start();
 
-  if(!isset($_SESSION['email']) && $_SESSION['administrador']) {
+  if(!isset($_SESSION['email']) ){
+    header('Location:formularioLogin.php');
+  }else if($_SESSION['perfil']!='administrador'){
     header('Location:formularioLogin.php');
   }
 
@@ -25,7 +27,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio de Sesion</title>
+    <title>Administrador</title>
     
     <link rel="stylesheet" href="estilos/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="estilos/estilos.css">
@@ -38,7 +40,7 @@
         <div class="row align-items-center justify-content-between">
             <div class="col-md-4 text-center">
                 <h1 class="text-white titulo">
-                  Usuario <?php echo $nombre; ?>
+                  Administrador - <?php echo $nombre; ?>
                 </h1>
             </div>
 
@@ -61,7 +63,7 @@
           ?>
         </p>
 
-        <form class="bg-light rounded p-3 m-5 shadow formulario" action="actualizarFotoPerfil.php" method="post" enctype="multipart/form-data">
+        <form class="bg-light rounded p-3 m-5 shadow formulario" action="actualizarFotoPerfilAdministrador.php" method="post" enctype="multipart/form-data">
 
           <?php
             if(isset($_GET['actu']) && $_GET['actu']==1){
@@ -75,13 +77,14 @@
             }
           ?>
           
-          <label class="fs-6 p-1 mt-3">Foto de Perfil:</label>
+          <label class="fs-6 p-1 mt-3">Foto de Perfil del Administrador:</label>
           <input class="form-control" placeholder="Imagen" id="file" type="file"  name="foto"   required>
 
           <button class="btn btn-dark w-100 mt-3" type="submit" value="actualizar">Actualizar</button>
         </form>
  
-          <a class="btn btn-secondary w-100 mt-3"  href="formularioUsuario.php">Editar Perfil</a>
+          <a class="btn btn-secondary w-100 mt-3"  href="formularioAdministrador.php">Editar Perfil Administrador</a>
+          <a class="btn btn-secondary w-100 mt-3"  href="listadoUsuarios.php">Editar Perfiles Usuarios</a>
 
       </div>
     </div>
