@@ -1,6 +1,12 @@
 <?php
     session_start();
 
+    if(!isset($_SESSION['email']) ){
+      header('Location:formularioLogin.php');
+    }else if($_SESSION['perfil']!='administrador'){
+      header('Location:formularioLogin.php');
+    }
+
     $conexion = mysqli_connect("localhost", "root", "", "usuario") 
     or die("Problemas con la conexión");
 
@@ -21,7 +27,6 @@
         $Poblacion=$row['Usuario_poblacion'];
         $Provincia=$row['Usuario_provincia'];
         $Domicilio=$row['Usuario_domicilio'];
-        $Bloqueado=$row['Usuario_bloqueado'];
     }
 
     mysqli_close($conexion);
@@ -88,9 +93,6 @@
             <label class="fs-6 p-1">Introduzca DNI:</label>
             <input class="form-control" id="nif" type="text" pattern="[0-9]{8}[A-Za-z]{1}" maxlength="40" name="nif" value="<?php echo $Nif; ?>">
 
-            <label class="fs-6 p-1">Introduzca Bloqueo:</label>
-            <input class="form-control" id="bloqueado" type="text" pattern="[0-9]{1}" maxlength="1" name="bloqueado" value="<?php echo $Bloqueado; ?>">
-
             <label class="fs-6 p-1">Introduzca Telefono:</label>
             <input class="form-control" id="telefono" type="tel" pattern="[0-9]{9}" maxlength="40" name="telefono" value="<?php echo $Telefono; ?>">
 
@@ -98,7 +100,7 @@
             <input class="form-control" id="nick" type="text"  maxlength="40" name="nick" value="<?php echo $Nick; ?>">
 
             <label class="fs-6 p-1">Introduzca Domicilio:</label>
-            <input class="form-control" id="domicilio" type="text" pattern="^[A-ZÁÉÍÓÚÑ][A-ZÁÉÍÓÚÑa-záéíóúñ\s]*$" maxlength="40" name="domicilio" value="<?php echo $Domicilio; ?>">
+            <input class="form-control" id="domicilio" type="text"  maxlength="40" name="domicilio" value="<?php echo $Domicilio; ?>">
 
             <label class="fs-6 p-1">Introduzca Poblacion:</label>
             <input class="form-control" id="poblacion" type="text" pattern="^[A-ZÁÉÍÓÚÑ][A-ZÁÉÍÓÚÑa-záéíóúñ\s]*$" maxlength="40" name="poblacion" value="<?php echo $Poblacion; ?>">

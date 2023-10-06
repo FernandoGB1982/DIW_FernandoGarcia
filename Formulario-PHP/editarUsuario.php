@@ -1,5 +1,11 @@
 <?php
   session_start();
+  
+  if(!isset($_SESSION['email']) ){
+    header('Location:formularioLogin.php');
+  }else if($_SESSION['perfil']!='administrador'){
+    header('Location:formularioLogin.php');
+  }
 
   $id=$_GET['codigoEditar'];
 
@@ -9,7 +15,6 @@
   $nombre = $_POST['nombre'];
   $apellido1 = $_POST['apellido1'];
   $apellido2 = $_POST['apellido2'];
-  $bloqueado = $_POST['bloqueado'];
   $nif = $_POST['nif'];
   $telefono =$_POST['telefono'];
   $nick = $_POST['nick'];
@@ -20,7 +25,7 @@
   
   $actualiza=mysqli_query($conexion, 
   "UPDATE usuarios  
-  SET Usuario_nombre = '$nombre', Usuario_apellido1 = '$apellido1', Usuario_apellido2 = '$apellido2', Usuario_bloqueado = '$bloqueado',
+  SET Usuario_nombre = '$nombre', Usuario_apellido1 = '$apellido1', Usuario_apellido2 = '$apellido2',
   Usuario_nif = '$nif', Usuario_numero_telefono = '$telefono', Usuario_Nick = '$nick', Usuario_domicilio = '$domicilio' ,Usuario_Poblacion = '$poblacion', Usuario_Provincia = '$provincia'
   WHERE Usuario_id='$id'")
   or die("Problemas en el update" . mysqli_error($conexion));

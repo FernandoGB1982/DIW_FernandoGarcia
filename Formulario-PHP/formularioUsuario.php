@@ -99,7 +99,7 @@
             <input class="form-control" id="nick" type="text"  maxlength="40" name="nick" value="<?php echo $Nick; ?>">
 
             <label class="fs-6 p-1">Introduzca Domicilio:</label>
-            <input class="form-control" id="domicilio" type="text" pattern="^[A-ZÁÉÍÓÚÑ][A-ZÁÉÍÓÚÑa-záéíóúñ\s]*$" maxlength="40" name="domicilio" value="<?php echo $Domicilio; ?>">
+            <input class="form-control" id="domicilio" type="text"  maxlength="40" name="domicilio" value="<?php echo $Domicilio; ?>">
 
             <label class="fs-6 p-1">Introduzca Poblacion:</label>
             <input class="form-control" id="poblacion" type="text" pattern="^[A-ZÁÉÍÓÚÑ][A-ZÁÉÍÓÚÑa-záéíóúñ\s]*$" maxlength="40" name="poblacion" value="<?php echo $Poblacion; ?>">
