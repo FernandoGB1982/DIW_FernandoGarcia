@@ -285,19 +285,20 @@
     <ul class="pagination justify-content-center">
 
       <?php  
+        $paginaSuperior=$paginaActual;
+        $paginaInferior=$paginaActual;
+        
           echo "<li class='page-item '> <a class='page-link' href='ListadoUsuarios.php?pagina=1&filtro=$filtro'> Inicio </a>";
-      ?>
 
-      <?php 
+
         if($paginaActual==1){
           echo "<li class='page-item '> <a class='page-link' href='ListadoUsuarios.php?pagina=$paginaActual&filtro=$filtro'> < </a>";
-        }else{
-          $paginaActual-=1;
-          echo "<li class='page-item '> <a class='page-link' href='ListadoUsuarios.php?pagina=$paginaActual&filtro=$filtro'> < </a>";
+        }else {
+          $paginaInferior--;
+          echo "<li class='page-item '> <a class='page-link' href='ListadoUsuarios.php?pagina=$paginaInferior&filtro=$filtro'> < </a>";
         }
-      ?>
-      
-      <?php
+
+       
         for($i=1; $i <= $totalPaginas; $i++){
           if($paginaActual == $i){
             echo " <li class='page-item '> <a class='page-link' href='ListadoUsuarios.php?pagina=$i&filtro=$filtro'> $i</a>";
@@ -305,25 +306,16 @@
             echo " <li class='page-item '> <a class='page-link' href='ListadoUsuarios.php?pagina=$i&filtro=$filtro'> $i</a>";
           }
         }
-
-        if($paginaActual==1){
-          $paginaActual++;
-        }
-        if($paginaActual==$totalPaginas){
-          $paginaActual--;
-        }
-      ?>
-
-      <?php 
+      
+      
         if($paginaActual==$totalPaginas){
           echo "<li class='page-item '> <a class='page-link' href='ListadoUsuarios.php?pagina=$paginaActual&filtro=$filtro'> > </a>";
-        }else{
-          $paginaActual+=1;
-          echo "<li class='page-item '> <a class='page-link' href='ListadoUsuarios.php?pagina=$paginaActual&filtro=$filtro'> > </a>";
+        }else {
+          $paginaSuperior++;
+          echo "<li class='page-item '> <a class='page-link' href='ListadoUsuarios.php?pagina=$paginaSuperior&filtro=$filtro'> > </a>";
         }
-      ?>
 
-      <?php 
+
           echo "<li class='page-item '> <a class='page-link' href='ListadoUsuarios.php?pagina=$totalPaginas&filtro=$filtro'> Final </a>";
       ?>
 
