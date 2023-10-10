@@ -46,7 +46,7 @@
 
   <main class="container p-2 contenido">
 
-  <!-- Filtrado -->
+    <!-- Filtrado -->
         <div class="row align-items-center justify-content-around mt-5 border border-info" >
           <div class="col-md-12 text-center pb-3 bg-light">
             <form action="listadoUsuarios.php" method="post" name="filtrado">
@@ -95,7 +95,7 @@
               }
 
 
-//PAGINACION FILTRADA
+          //PAGINACION FILTRADA
               if(isset($_GET['filtro'])){
                 if($_GET['filtro']==0){
 
@@ -164,7 +164,7 @@
 
                   $filtro=3;
                 }
-//FIN PAGINACION FILTRADA
+          //FIN PAGINACION FILTRADA
 
               }else{
 
@@ -203,7 +203,7 @@
                 }
             }
 
-//Paginacion
+        //Paginacion
               $resultadoTotal = mysqli_query($conexion, $queryTotal);
               $rowTotal = mysqli_fetch_assoc($resultadoTotal);
               if(isset($rowTotal['total'])){
@@ -212,14 +212,14 @@
                 $totalRegistros = 0;
               }
               $totalPaginas = ceil($totalRegistros / $registrosPorPagina);         
-//Fin Paginacion
+        //Fin Paginacion
 
               $registros = mysqli_query($conexion,$sql) 
                 or die("Problemas en el select:" . mysqli_error($conexion));
             ?>
           </div>
         </div>
- <!-- Fin Filtrado -->
+  <!-- Fin Filtrado -->
 
 
       <form action="editarBloqueo.php" method="post" name="formulario">
@@ -236,6 +236,8 @@
             <th scope="col">Nick</th>
             <th scope="col">Poblacion</th>
             <th scope="col">Bloqueado</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
           </tr>
           </thead>
           <tbody class="text-center">
@@ -278,51 +280,51 @@
           </tbody>
         </table>
 
-<!--Paginacion-->
 
-<div class="col-md-12">
-  <nav aria-label="Page navigation">
-    <ul class="pagination justify-content-center">
+    <!--Mostrar Paginacion-->
+        <div class="col-md-12">
+          <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
 
-      <?php  
-        $paginaSuperior=$paginaActual;
-        $paginaInferior=$paginaActual;
-        
-          echo "<li class='page-item '> <a class='page-link' href='ListadoUsuarios.php?pagina=1&filtro=$filtro'> Inicio </a>";
-
-
-        if($paginaActual==1){
-          echo "<li class='page-item '> <a class='page-link' href='ListadoUsuarios.php?pagina=$paginaActual&filtro=$filtro'> < </a>";
-        }else {
-          $paginaInferior--;
-          echo "<li class='page-item '> <a class='page-link' href='ListadoUsuarios.php?pagina=$paginaInferior&filtro=$filtro'> < </a>";
-        }
-
-       
-        for($i=1; $i <= $totalPaginas; $i++){
-          if($paginaActual == $i){
-            echo " <li class='page-item '> <a class='page-link' href='ListadoUsuarios.php?pagina=$i&filtro=$filtro'> $i</a>";
-          }else{
-            echo " <li class='page-item '> <a class='page-link' href='ListadoUsuarios.php?pagina=$i&filtro=$filtro'> $i</a>";
-          }
-        }
-      
-      
-        if($paginaActual==$totalPaginas){
-          echo "<li class='page-item '> <a class='page-link' href='ListadoUsuarios.php?pagina=$paginaActual&filtro=$filtro'> > </a>";
-        }else {
-          $paginaSuperior++;
-          echo "<li class='page-item '> <a class='page-link' href='ListadoUsuarios.php?pagina=$paginaSuperior&filtro=$filtro'> > </a>";
-        }
+              <?php  
+                $paginaSuperior=$paginaActual;
+                $paginaInferior=$paginaActual;
+                
+                  echo "<li class='page-item '> <a class='page-link' href='ListadoUsuarios.php?pagina=1&filtro=$filtro'> Inicio </a>";
 
 
-          echo "<li class='page-item '> <a class='page-link' href='ListadoUsuarios.php?pagina=$totalPaginas&filtro=$filtro'> Final </a>";
-      ?>
+                if($paginaActual==1){
+                  echo "<li class='page-item '> <a class='page-link' href='ListadoUsuarios.php?pagina=$paginaActual&filtro=$filtro'> < </a>";
+                }else {
+                  $paginaInferior--;
+                  echo "<li class='page-item '> <a class='page-link' href='ListadoUsuarios.php?pagina=$paginaInferior&filtro=$filtro'> < </a>";
+                }
 
-    </ul>
-  </nav>
-</div> 
-<!--Fin Paginacion-->
+              
+                for($i=1; $i <= $totalPaginas; $i++){
+                  if($paginaActual == $i){
+                    echo " <li class='page-item active'> <a class='page-link' href='ListadoUsuarios.php?pagina=$i&filtro=$filtro'> $i</a>";
+                  }else{
+                    echo " <li class='page-item '> <a class='page-link' href='ListadoUsuarios.php?pagina=$i&filtro=$filtro'> $i</a>";
+                  }
+                }
+              
+              
+                if($paginaActual==$totalPaginas){
+                  echo "<li class='page-item '> <a class='page-link' href='ListadoUsuarios.php?pagina=$paginaActual&filtro=$filtro'> > </a>";
+                }else {
+                  $paginaSuperior++;
+                  echo "<li class='page-item '> <a class='page-link' href='ListadoUsuarios.php?pagina=$paginaSuperior&filtro=$filtro'> > </a>";
+                }
+
+
+                  echo "<li class='page-item '> <a class='page-link' href='ListadoUsuarios.php?pagina=$totalPaginas&filtro=$filtro'> Final </a>";
+              ?>
+
+            </ul>
+          </nav>
+        </div> 
+    <!--Fin Mostrar Paginacion-->
 
         <div class="col-md-12 mt-5 text-center">
           <button class='btn btn-dark mb-5' type="submit" name="bloqueo">Bloquear/Desbloquear</a>
