@@ -48,8 +48,10 @@
                   },5000)
                 </script>';
               }else if(isset($_GET['register']) && $_GET['register']==1){
-                echo "<div class='alert alert-success' id='registerAlert1' role='alert'>Usuario Registrado con Exito!!</div>
-                <div class='alert alert-info' id='registerAlert2' role='alert'>Se le he enviado un Email de Confirmación</div>";
+                /*echo "<div class='alert alert-success' id='registerAlert1' role='alert'>Usuario Registrado con Exito!!</div>
+                <div class='alert alert-info' id='registerAlert2' role='alert'>Se le he enviado un Email de Confirmación</div>";*/
+                
+                echo "<div class='alert alert-success' id='registerAlert1' role='alert'>Usuario Registrado con Exito!!</div>";
                 echo
                 '<script>
                   setTimeout(function(){

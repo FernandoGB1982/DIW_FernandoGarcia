@@ -12,4 +12,19 @@
   text-decoration: none;
 }
 
+#googleMap {
+  height: 25%;
+  width: 90%;
+  display:block;
+  margin:auto;
+} 
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+
    

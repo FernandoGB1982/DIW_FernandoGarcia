@@ -26,32 +26,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio de Sesion</title>
+
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAK4PKDT4ASOivyIgRqB52BgMdUNSadjm0&callback=myMap" defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAK4PKDT4ASOivyIgRqB52BgMdUNSadjm0&callback=initMap&libraries=&v=weekly" defer></script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAK4PKDT4ASOivyIgRqB52BgMdUNSadjm0&libraries=geometry"></script>
     
     <link rel="stylesheet" href="estilos/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="estilos/estilos.css">
+
+    <style>
+        #googleMap {
+          height: 25%;
+          width: 90%;
+          display:block;
+          margin:auto;
+        } 
+
+        html,
+        body {
+          height: 100%;
+          margin: 0;
+          padding: 0;
+        }
+    </style>
 </head>
 
 <body>
 
-    <header class="pt-3 bg-secondary container-fluid header">
-      <div class="container">
-        <div class="row align-items-center justify-content-between">
-            <div class="col-md-4 text-center">
-                <h1 class="text-white titulo">
-                  Usuario <?php echo $nombre; ?>
-                </h1>
-            </div>
-
-            <div class="col-md-4 text-md-end text-center" >
-              <a class="fs-6 fw-bold text-uppercase text-white enlace me-5"  href="logout.php">Logout</a>
+  <header class="pt-3 bg-secondary container-fluid header">
+    <div class="container">
+      <div class="row align-items-center justify-content-between">
+          <div class="col-md-4 text-center">
+              <h1 class="text-white titulo">
+                Usuario <?php echo $nombre; ?>
+              </h1>
           </div>
-        </div> 
-    </header>
+
+          <div class="col-md-4 text-md-end text-center" >
+            <a class="fs-6 fw-bold text-uppercase text-white enlace me-5"  href="logout.php">Logout</a>
+        </div>
+      </div> 
+  </header>
+
+  <div id="googleMap" class="mt-5"></div>
 
   <main class="container p-2 contenido pb-md-0 pb-5">
     <div class="row g-0 align-items-center justify-content-around">
       <div class="col-md-4">
-        <img class="img-fluid mt-5 mb-5 p-md-0 p-5" src="data:image/png;base64,<?php echo $foto; ?>" alt="usuario">
+        <img class="img-fluid mt-5 mb-5 p-md-0 p-5 " src="data:image/png;base64,<?php echo $foto; ?>" alt="usuario">
       </div>
 
       <div class="col-md-4">
@@ -81,7 +105,7 @@
           <button class="btn btn-dark w-100 mt-3" type="submit" value="actualizar">Actualizar</button>
         </form>
  
-          <a class="btn btn-secondary w-100 mt-3"  href="formularioUsuario.php">Editar Perfil</a>
+          <a class="btn btn-secondary w-100 mt-3 mb-3"  href="formularioUsuario.php">Editar Perfil</a>
 
       </div>
     </div>
@@ -93,6 +117,34 @@
       <span class="text-center fs-5 fw-normal text-capitalize text-white m-0"> Fernando Garcia Berraquero</span>
     </p>
   </footer>
+
+  <script>
+    function myMap(position) {
+            var userLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+            var mapProp = {
+                center: userLocation,
+                zoom: 15
+            };
+            var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+
+            var marker = new google.maps.Marker({
+                position: userLocation,
+                map: map,
+                title: 'Tu ubicación'
+            });
+        }
+
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(myMap);
+      } else {
+        alert("La geolocalización no está disponible en tu navegador.");
+      }
+    }
+
+    window.onload = getLocation; // Obtener la ubicación al cargar la página.
+  </script>
 </body>
 
 </html>
