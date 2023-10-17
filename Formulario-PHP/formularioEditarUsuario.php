@@ -94,7 +94,7 @@
             <input class="form-control" id="nif" type="text" pattern="[0-9]{8}[A-Za-z]{1}" maxlength="40" name="nif" value="<?php echo $Nif; ?>">
 
             <label class="fs-6 p-1">Introduzca Telefono:</label>
-            <input class="form-control" id="telefono" type="tel" pattern="[0-9]{9}" maxlength="40" name="telefono" value="<?php echo $Telefono; ?>">
+            <input class="form-control" id="telefono" type="tel" pattern="[0-9]{9}" maxlength="9" name="telefono" value="<?php echo $Telefono; ?>">
 
             <label class="fs-6 p-1">Introduzca Nick:</label>
             <input class="form-control" id="nick" type="text"  maxlength="40" name="nick" value="<?php echo $Nick; ?>">

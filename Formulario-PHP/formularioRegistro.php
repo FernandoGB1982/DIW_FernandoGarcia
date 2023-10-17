@@ -28,7 +28,7 @@
   <main class="container p-2 contenido">
     <div class="row g-0 align-items-center justify-content-around">
       <div class="col-md-4">
-        <form class="bg-light rounded p-3 m-5 shadow formulario" action="registro.php" method="post">
+        <form class="bg-light rounded p-3 m-5 shadow formulario" id="formulario" action="registro.php" method="post">
        
             <?php
               if(isset($_GET['pass']) && $_GET['pass']==1){
@@ -70,12 +70,11 @@
             <input class="form-control" id="email" type="email" placeholder="*****@*****.***" pattern="[a-zñ0-9._%+-]+@[a-z0-9.-]+\.[a-zñ]{2,3}$"  maxlength="40" name="email"  required>
 
             <label class="fs-6 p-1 mt-3">Introduzca Password:</label>
-            <input class="form-control" id="pass1" type="password" placeholder="Contraseña"  minlength="5" name="contraseña1" required>
+            <input class="form-control" id="pass1" type="password" placeholder="Contraseña"  minlength="5" name="contraseña1" onkeyup="validarPassword(this.value)" required>
+            <div id="mensaje-validacion" class="mt-2 text-center text-info">La contraseña debe incluir al menos una letra mayúscula, una letra minúscula, un número y tener al menos 8 caracteres</div>
 
             <label class="fs-6 p-1 mt-3">Repetir Password:</label>
             <input class="form-control" id="pass2" type="password" placeholder="Repetir Contraseña"  minlength="5" name="contraseña2" required>
-
-            
             
             <button class="btn btn-dark w-100 mt-5" type="submit" value="registrar">Registrar
         </form>
@@ -93,6 +92,34 @@
       <span class="text-center fs-5 fw-normal text-capitalize text-white m-0"> Fernando Garcia Berraquero</span>
     </p>
   </footer>
+
+  <script>
+     // Define una expresión regular que verifica la contraseña segura
+     const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+
+    function validarPassword(password) {
+            if (strongPasswordRegex.test(password)) {
+                document.getElementById("mensaje-validacion").innerHTML = "<p class='text-uppercase text-white fw-bold p-1'>Contraseña segura</p>";
+                document.getElementById("mensaje-validacion").style.backgroundColor = "green";
+            }else if (password.length) {
+                document.getElementById("mensaje-validacion").innerHTML = "<p class='text-uppercase text-white fw-bold p-1'>Contraseña poco segura</p>";
+                document.getElementById("mensaje-validacion").style.backgroundColor = "orange";
+            }else {
+                document.getElementById("mensaje-validacion").innerHTML = "<p class='text-uppercase text-white fw-bold p-1'>Contraseña no segura</p>";
+                document.getElementById("mensaje-validacion").style.backgroundColor = "red";
+            }
+    }
+
+    // Agregar un controlador de eventos al formulario para prevenir el envío si la contraseña no es válida
+    const passwordForm = document.getElementById("formulario");
+    passwordForm.addEventListener("submit", function (event) {
+        const passwordInput = document.getElementById("pass1");
+        if (!strongPasswordRegex.test(passwordInput.value)) {
+            event.preventDefault(); // Evita el envío del formulario
+            alert("La contraseña no es válida. Por favor, corríjala antes de enviar.");
+        }
+    });
+  </script>
 
 </body>
 
