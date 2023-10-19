@@ -25,8 +25,6 @@
         $Provincia=$row['Usuario_provincia'];
         $Domicilio=$row['Usuario_domicilio'];
     }
-
-    mysqli_close($conexion);
 ?>
 
 <!DOCTYPE html>
@@ -77,6 +75,14 @@
                       },5000)
                     </script>';
                   }
+
+                  $provincias = mysqli_query($conexion, "SELECT  * FROM provincias")
+                              or die("Problemas en el select:" . mysqli_error($conexion));
+
+                  $municipios = mysqli_query($conexion, "SELECT  * FROM municipios")
+                              or die("Problemas en el select:" . mysqli_error($conexion));
+
+                  mysqli_close($conexion);
             ?>
 
             <label class="fs-6 p-1">Introduzca Nombre:</label>
@@ -101,12 +107,50 @@
             <label class="fs-6 p-1">Introduzca Domicilio:</label>
             <input class="form-control" id="domicilio" type="text"  maxlength="40" name="domicilio" value="<?php echo $Domicilio; ?>">
 
-            <label class="fs-6 p-1">Introduzca Poblacion:</label>
-            <input class="form-control" id="poblacion" type="text" pattern="^[A-ZÁÉÍÓÚÑ][A-ZÁÉÍÓÚÑa-záéíóúñ\s]*$" maxlength="40" name="poblacion" value="<?php echo $Poblacion; ?>">
-
             <label class="fs-6 p-1">Introduzca Provincia:</label>
-            <input class="form-control" id="provincia" type="text" pattern="^[A-ZÁÉÍÓÚÑ][A-ZÁÉÍÓÚÑa-záéíóúñ\s]*$" maxlength="40" name="provincia" value="<?php echo $Provincia; ?>">
+            <select name="provincia" class="form-control">
+                <option value="">Seleccionar</option>';
+                <?php
+                  while ($reg = mysqli_fetch_array($provincias)) {
+                    if($reg['idProvincia']!=''){
+                      $provincia = $reg['Provincia'];
+                      $idProvincia = $reg['idProvincia'];
 
+                      if ($provincia==$Provincia){
+                        echo "<option value='$provincia' selected>$provincia</option>";
+                      }else{
+                        echo "<option value='$provincia'>$provincia</option>";
+                      }
+                    }
+                  }
+                ?>
+            </select>
+            <!--
+            <input class="form-control" id="provincia" type="text" pattern="^[A-ZÁÉÍÓÚÑ][A-ZÁÉÍÓÚÑa-záéíóúñ\s]*$" maxlength="40" name="provincia" value="<?php echo $Provincia; ?>">
+            -->
+
+            <label class="fs-6 p-1">Introduzca Poblacion:</label>
+            <select name="poblacion" class="form-control">
+                <option value="">Seleccionar</option>';
+                <?php
+                  while ($reg = mysqli_fetch_array($municipios)) {
+                    if($reg['idMunicipio']!=''){
+                      $municipio = $reg['Municipio'];
+                      $idMunicipio = $reg['idMunicipio'];
+
+                      if ($municipio==$Poblacion){
+                        echo "<option value='$municipio' selected>$municipio</option>";
+                      }else{
+                        echo "<option value='$municipio'>$municipio</option>";
+                      }
+                    }
+                  }
+                ?>
+            </select>
+            <!--
+            <input class="form-control" id="poblacion" type="text" pattern="^[A-ZÁÉÍÓÚÑ][A-ZÁÉÍÓÚÑa-záéíóúñ\s]*$" maxlength="40" name="poblacion" value="<?php echo $Poblacion; ?>">
+            -->
+            
             <button class="btn btn-dark w-100 mt-3" type="submit" value="editar">Actualizar 
         </form>
       </div>
