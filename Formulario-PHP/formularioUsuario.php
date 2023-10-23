@@ -108,7 +108,7 @@
             <input class="form-control" id="domicilio" type="text"  maxlength="40" name="domicilio" value="<?php echo $Domicilio; ?>">
 
             <label class="fs-6 p-1">Introduzca Provincia:</label>
-            <select name="provincia" class="form-control">
+            <select name="provincia" class="form-control" id="provinciaSelect">
                 <option value="">Seleccionar</option>';
                 <?php
                   while ($reg = mysqli_fetch_array($provincias)) {
@@ -116,10 +116,10 @@
                       $provincia = $reg['Provincia'];
                       $idProvincia = $reg['idProvincia'];
 
-                      if ($provincia==$Provincia){
-                        echo "<option value='$provincia' selected>$provincia</option>";
+                      if ($idProvincia==$Provincia){
+                        echo "<option value='$idProvincia' selected>$provincia</option>";
                       }else{
-                        echo "<option value='$provincia'>$provincia</option>";
+                        echo "<option value='$idProvincia'>$provincia</option>";
                       }
                     }
                   }
@@ -130,7 +130,7 @@
             -->
 
             <label class="fs-6 p-1">Introduzca Poblacion:</label>
-            <select name="poblacion" class="form-control">
+            <select name="poblacion" class="form-control" id="poblacionSelect">
                 <option value="">Seleccionar</option>';
                 <?php
                   while ($reg = mysqli_fetch_array($municipios)) {
@@ -164,6 +164,36 @@
       <span class="text-center fs-5 fw-normal text-capitalize text-white m-0"> Fernando Garcia Berraquero</span>
     </p>
   </footer>
+
+  
+
+<script>
+    const provinciaSelect = document.getElementById('provinciaSelect');
+    const poblacionSelect = document.getElementById('poblacionSelect');
+
+    provinciaSelect.addEventListener('change', function () {
+        const selectedProvinciaId = provinciaSelect.value;
+
+        poblacionSelect.innerHTML = '<option value="">Seleccionar</option>';
+
+        fetch('get_municipalities.php?id=' + selectedProvinciaId)
+            .then(response => response.json())
+            .then(data => {
+                if (Array.isArray(data)) {
+                    data.forEach(municipio => {
+                        const option = document.createElement('option');
+                        option.value = municipio.Municipio;
+                        option.textContent = municipio.Municipio;
+                        poblacionSelect.appendChild(option);
+                    });
+                } else {
+                    console.error('Los datos recibidos no son un array válido.');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    });
+</script>
+
 
 </body>
 
