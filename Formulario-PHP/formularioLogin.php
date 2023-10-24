@@ -1,9 +1,36 @@
+<?php
+  /*
+  //Localizacion de Trebujena
+  $ubicacion_deseada = array(
+    'latitud' => 36.924196,
+    'longitud' => -6.166927
+  );
+  */
+  
+  //Localizacion Jerez
+  $ubicacion_deseada = array(
+    'latitud' => 36.6850,
+    'longitud' => -6.1266
+  );
+  
+  /*
+  Si la recarga de la página solo funciona correctamente la primera vez que se muestra la alerta, es posible que se deba a un problema de caché en el navegador. Puedes intentar desactivar el almacenamiento en caché en el encabezado de la respuesta HTTP del servidor para asegurarte de que la página se recargue cada vez. Para hacer esto, puedes agregar el siguiente encabezado a tu página PHP:
+  */
+  header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+  header("Cache-Control: post-check=0, pre-check=0", false);
+  header("Pragma: no-cache");
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio de Sesion</title>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAK4PKDT4ASOivyIgRqB52BgMdUNSadjm0&callback=myMap" defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAK4PKDT4ASOivyIgRqB52BgMdUNSadjm0&callback=initMap&libraries=&v=weekly" defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAK4PKDT4ASOivyIgRqB52BgMdUNSadjm0&libraries=geometry" defer></script>
     
     <link rel="stylesheet" href="estilos/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="estilos/estilos.css">
@@ -105,7 +132,7 @@
             <!-- <p  class="fs-6 p-1 mt-0">¿Has Olvidado tu Contraseña? <a href="formularioContraseña.php">Pulse aquí</a>
             </p> -->
             
-            <button class="btn btn-dark w-100 " type="submit" value="login">Iniciar Sesión 
+            <button class="btn btn-dark w-100 " type="submit" id="iniciarSesion" value="login" onclick="getLocation()">Iniciar Sesión 
         </form>
       </div>
 
@@ -121,6 +148,54 @@
       <span class="text-center fs-5 fw-normal text-capitalize text-white m-0"> Fernando Garcia Berraquero</span>
     </p>
   </footer>
+
+  <script>
+
+    
+    function myMap(position) {
+            var userLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+
+            //AQUI esta la forma de ver si se esta en una localizacion para poder logearte
+
+            // Definir las coordenadas de la ubicación deseada
+            var ubicacionDeseada = new google.maps.LatLng(<?php echo $ubicacion_deseada['latitud']; ?>, <?php echo $ubicacion_deseada['longitud']; ?>);
+
+            // Calcular la distancia entre la ubicación del usuario y la ubicación deseada
+            var distancia = google.maps.geometry.spherical.computeDistanceBetween(userLocation, ubicacionDeseada);
+
+            if (distancia > 3000) { // Cambia el valor según tu preferencia en metros
+                alert("No estás en la ubicación deseada - NO puedes Iniciar Sesión");
+                location.reload();
+            }
+            //Fin de localizacion para logearte
+
+            var mapProp = {
+                center: userLocation,
+                zoom: 15
+            };
+            var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+
+            var marker = new google.maps.Marker({
+                position: userLocation,
+                map: map,
+                title: 'Tu ubicación'
+            });
+
+
+            var userLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        }
+
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(myMap);
+      } else {
+        alert("La geolocalización no está disponible en tu navegador.");
+      }
+    }
+
+    //window.onload = getLocation; // Obtener la ubicación al cargar la página.
+  </script>
 
 </body>
 

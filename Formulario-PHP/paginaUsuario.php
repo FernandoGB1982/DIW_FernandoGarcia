@@ -1,4 +1,19 @@
 <?php
+  /*
+  //Localizacion de Trebujena
+  $ubicacion_deseada = array(
+    'latitud' => 36.924196,
+    'longitud' => -6.166927
+  );
+  */
+  /*
+  //Localizacion Jerez
+  $ubicacion_deseada = array(
+    'latitud' => 36.6850,
+    'longitud' => -6.1266
+  );
+  */
+
   session_start();
 
   if(!isset($_SESSION['email']) && $_SESSION['administrador']) {
@@ -27,11 +42,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio de Sesion</title>
 
-
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAK4PKDT4ASOivyIgRqB52BgMdUNSadjm0&callback=myMap" defer></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAK4PKDT4ASOivyIgRqB52BgMdUNSadjm0&callback=initMap&libraries=&v=weekly" defer></script>
-
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAK4PKDT4ASOivyIgRqB52BgMdUNSadjm0&libraries=geometry"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAK4PKDT4ASOivyIgRqB52BgMdUNSadjm0&libraries=geometry" defer></script>
     
     <link rel="stylesheet" href="estilos/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="estilos/estilos.css">
@@ -122,6 +135,19 @@
     function myMap(position) {
             var userLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
+            /*
+            // Definir las coordenadas de la ubicación deseada
+            var ubicacionDeseada = new google.maps.LatLng(<?php echo $ubicacion_deseada['latitud']; ?>, <?php echo $ubicacion_deseada['longitud']; ?>);
+
+            // Calcular la distancia entre la ubicación del usuario y la ubicación deseada
+            var distancia = google.maps.geometry.spherical.computeDistanceBetween(userLocation, ubicacionDeseada);
+
+            if (distancia > 3000) { // Cambia el valor según tu preferencia en metros
+                alert("No estás en la ubicación deseada.");
+                window.location = 'formularioLogin.php'; // Redirige al usuario si no está en la ubicación deseada
+            }
+            */
+            
             var mapProp = {
                 center: userLocation,
                 zoom: 15
@@ -133,6 +159,9 @@
                 map: map,
                 title: 'Tu ubicación'
             });
+
+
+            var userLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
         }
 
     function getLocation() {
