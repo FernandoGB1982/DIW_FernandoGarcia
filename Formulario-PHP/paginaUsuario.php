@@ -125,17 +125,10 @@
   </main>
 
   <footer class="p-3 bg-secondary footer">
-    <div class="container row align-items-center">
-      <div class="col-md-6 text-start">
-        <p class="text-end fs-6 fw-bold text-uppercase text-white m-0">
-          Diseño Interfaces Web - 
-          <span class="text-center fs-5 fw-normal text-capitalize text-white m-0"> Fernando Garcia Berraquero</span>
-        </p>
-      </div>
-      <div class="col-md-6 text-end">
-          <a class="fs-6 fw-bold text-uppercase text-white enlace"  href="contactanos.php">Contáctanos</a>
-      </div>
-    </div>  
+    <p class="text-center fs-6 fw-bold text-uppercase text-white m-0">
+      Diseño Interfaces Web - 
+      <span class="text-center fs-5 fw-normal text-capitalize text-white m-0"> Fernando Garcia Berraquero</span>
+    </p>
   </footer>
 
   <script>

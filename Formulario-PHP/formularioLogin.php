@@ -1,18 +1,18 @@
 <?php
-  
+  /*
   //Localizacion de Trebujena
   $ubicacion_deseada = array(
     'latitud' => 36.867089191798755,
     'longitud' => -6.178597334558331
   );
+  */
   
-  /*
   //Localizacion Jerez
   $ubicacion_deseada = array(
     'latitud' => 36.70432705932596,
     'longitud' => -6.112493271385153
   );
-  */
+  
   /*
   Si la recarga de la página solo funciona correctamente la primera vez que se muestra la alerta, es posible que se deba a un problema de caché en el navegador. Puedes intentar desactivar el almacenamiento en caché en el encabezado de la respuesta HTTP del servidor para asegurarte de que la página se recargue cada vez. Para hacer esto, puedes agregar el siguiente encabezado a tu página PHP:
   */
@@ -196,8 +196,6 @@
         alert("La geolocalización no está disponible en tu navegador.");
       }
     }
-
-    //window.onload = getLocation; // Obtener la ubicación al cargar la página.
   </script>
 
 </body>

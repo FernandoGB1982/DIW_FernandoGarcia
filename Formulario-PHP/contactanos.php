@@ -13,19 +13,10 @@
 
     <style>
         #googleMap {
-          height: 300px;
-          width: 400px;
+          height:300px;
           display:flex;
           margin:auto;
         } 
-
-        html,
-        body{
-          height: 100%;
-          margin: 0;
-          padding: 0;
-        }
-
     </style>
 </head>
 
@@ -61,7 +52,7 @@
                 </li>
             </ul>
 
-            <div id="googleMap"></div>
+            <div class="col-md-4" id="googleMap"></div>
         </div>
 
         <div class="col-md-4 bg-light rounded p-3 m-5 shadow formulario">
