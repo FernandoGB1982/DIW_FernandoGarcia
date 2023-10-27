@@ -1,18 +1,18 @@
 <?php
-  /*
+  
   //Localizacion de Trebujena
   $ubicacion_deseada = array(
-    'latitud' => 36.924196,
-    'longitud' => -6.166927
+    'latitud' => 36.867089191798755,
+    'longitud' => -6.178597334558331
   );
-  */
   
+  /*
   //Localizacion Jerez
   $ubicacion_deseada = array(
-    'latitud' => 36.6850,
-    'longitud' => -6.1266
+    'latitud' => 36.70432705932596,
+    'longitud' => -6.112493271385153
   );
-  
+  */
   /*
   Si la recarga de la página solo funciona correctamente la primera vez que se muestra la alerta, es posible que se deba a un problema de caché en el navegador. Puedes intentar desactivar el almacenamiento en caché en el encabezado de la respuesta HTTP del servidor para asegurarte de que la página se recargue cada vez. Para hacer esto, puedes agregar el siguiente encabezado a tu página PHP:
   */
@@ -143,10 +143,17 @@
   </main>
 
   <footer class="p-3 bg-secondary footer">
-    <p class="text-center fs-6 fw-bold text-uppercase text-white m-0">
-      Diseño Interfaces Web - 
-      <span class="text-center fs-5 fw-normal text-capitalize text-white m-0"> Fernando Garcia Berraquero</span>
-    </p>
+    <div class="container row align-items-center">
+      <div class="col-md-6 text-start">
+        <p class="text-end fs-6 fw-bold text-uppercase text-white m-0">
+          Diseño Interfaces Web - 
+          <span class="text-center fs-5 fw-normal text-capitalize text-white m-0"> Fernando Garcia Berraquero</span>
+        </p>
+      </div>
+      <div class="col-md-6 text-end">
+          <a class="fs-6 fw-bold text-uppercase text-white enlace"  href="contactanos.php">Contáctanos</a>
+      </div>
+    </div>  
   </footer>
 
   <script>
@@ -154,7 +161,6 @@
     
     function myMap(position) {
             var userLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-
 
             //AQUI esta la forma de ver si se esta en una localizacion para poder logearte
 
@@ -164,7 +170,7 @@
             // Calcular la distancia entre la ubicación del usuario y la ubicación deseada
             var distancia = google.maps.geometry.spherical.computeDistanceBetween(userLocation, ubicacionDeseada);
 
-            if (distancia > 3000) { // Cambia el valor según tu preferencia en metros
+            if (distancia > 1000) { // Cambia el valor según tu preferencia en metros
                 alert("No estás en la ubicación deseada - NO puedes Iniciar Sesión");
                 location.reload();
             }
@@ -181,9 +187,6 @@
                 map: map,
                 title: 'Tu ubicación'
             });
-
-
-            var userLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
         }
 
     function getLocation() {
