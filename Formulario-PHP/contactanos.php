@@ -7,6 +7,10 @@
     <title>Contáctanos</title>
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAK4PKDT4ASOivyIgRqB52BgMdUNSadjm0&callback=initMap" defer></script>
+    
+    <!-- BOT de compras de google* -->
+    <script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
+    <!-- fin BOT -->
 
     <link rel="stylesheet" href="estilos/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="estilos/estilos.css">
@@ -17,6 +21,16 @@
           display:flex;
           margin:auto;
         } 
+
+        /* BOT de compras de google*/
+        df-messenger {
+          z-index: 999;
+          position: fixed;
+          bottom: 16px;
+          right: 16px;
+        }
+        /* fin BOT*/
+</style>
     </style>
 </head>
 
@@ -89,7 +103,17 @@
     </div>
   </main>
 
- 
+  <!-- BOT de compras de google -->
+  <df-messenger
+    location="europe-west2"
+    project-id="forward-sentry-402217"
+    agent-id="a9e4ded1-6de3-4711-954b-c26e3454a633"
+    language-code="en">
+    <df-messenger-chat-bubble
+      chat-title="Order and account management">
+    </df-messenger-chat-bubble>
+  </df-messenger>
+  <!-- fin BOT -->
   
   <footer class="p-3 bg-secondary footer">
     <p class="text-center fs-6 fw-bold text-uppercase text-white m-0">
@@ -114,7 +138,6 @@
         });
     }
   </script>
-
 </body>
 
 </html>
