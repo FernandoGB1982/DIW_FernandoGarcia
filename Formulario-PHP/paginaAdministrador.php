@@ -45,8 +45,9 @@
             </div>
 
             <div class="col-md-4 text-md-end text-center" >
+              <a class="fs-6 fw-bold text-uppercase text-white enlace me-5"  href="listadoIncidencias.php">Incidencias</a>
               <a class="fs-6 fw-bold text-uppercase text-white enlace me-5"  href="logout.php">Logout</a>
-          </div>
+            </div>
         </div> 
     </header>
 

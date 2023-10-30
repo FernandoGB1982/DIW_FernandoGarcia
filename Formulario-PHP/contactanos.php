@@ -107,12 +107,12 @@
   <df-messenger
     location="europe-west2"
     project-id="forward-sentry-402217"
-    agent-id="a9e4ded1-6de3-4711-954b-c26e3454a633"
-    language-code="en">
+    agent-id="a28e969b-f9df-4128-bdb1-d87b835f85d0"
+    language-code="es">
     <df-messenger-chat-bubble
-      chat-title="Order and account management">
+      chat-title="Pregúntame">
     </df-messenger-chat-bubble>
-  </df-messenger>
+</df-messenger>
   <!-- fin BOT -->
   
   <footer class="p-3 bg-secondary footer">
