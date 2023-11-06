@@ -156,6 +156,7 @@
 
             var marker = new google.maps.Marker({
                 position: userLocation,
+                icon:'imagenes/icon.png',
                 map: map,
                 title: 'Tu ubicación'
             });

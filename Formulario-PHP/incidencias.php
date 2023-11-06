@@ -15,11 +15,6 @@
     if($inserta!=0){
         header('Location:contactanos.php?incidencia=1');
     }
-          
-    
 
-
-        
-    
   mysqli_close($conexion);
 ?>

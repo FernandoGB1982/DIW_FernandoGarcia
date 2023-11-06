@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -107,12 +106,12 @@
   <df-messenger
     location="europe-west2"
     project-id="forward-sentry-402217"
-    agent-id="a28e969b-f9df-4128-bdb1-d87b835f85d0"
+    agent-id="a6e51dc1-6ec0-43a2-8fbc-267b6b51a0b0"
     language-code="es">
     <df-messenger-chat-bubble
-      chat-title="Pregúntame">
+      chat-title="Asistente Virtual">
     </df-messenger-chat-bubble>
-</df-messenger>
+  </df-messenger>
   <!-- fin BOT -->
   
   <footer class="p-3 bg-secondary footer">
@@ -134,6 +133,7 @@
         var marker = new google.maps.Marker({
             position: trebujenaLocation,
             map: map,
+            icon: 'imagenes/icon3.jpg',
             title: 'Trebujena, España'
         });
     }
